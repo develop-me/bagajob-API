@@ -1,4 +1,4 @@
-# BagaJob - The Definitive Job Hunting App
+# BagaJob - The Definitive Job Hunting Management App
 ## Back-end Architecture - Laravel Blade
 
 ### Collaborating:
