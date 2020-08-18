@@ -4,23 +4,18 @@ cpus: 2
 provider: virtualbox
 authorize: ~/.ssh/id_rsa.pub
 keys:
-    - ~/.ssh/id_rsa
+  - ~/.ssh/id_rsa
 folders:
-    -
-        map: /Users/kieran/Documents/Projects/BagaJob/API
-        to: /home/vagrant/code
+  - map: /Users/mhairihislop/Documents/Programming/bagajob-API
+    to: /home/vagrant/code
 sites:
-    -
-        map: homestead.test
-        to: /home/vagrant/code/public
+  - map: homestead.test
+    to: /home/vagrant/code/public
 databases:
-    - homestead
+  - homestead
 features:
-    -
-        mariadb: false
-    -
-        ohmyzsh: false
-    -
-        webdriver: false
-name: api
-hostname: api
+  - mariadb: false
+  - ohmyzsh: false
+  - webdriver: false
+name: bagajob-api
+hostname: bagajob-api
