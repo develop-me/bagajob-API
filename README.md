@@ -3,7 +3,7 @@
 
 ### Collaborating:
 
-**Never commit directly to the master branch. Create a new branch, and make a merge request to a collaborator.**
+**Never commit directly to the master branch. Create a new feature branch from the development branch, and make a pull request for a team-mate to review and merge.**
 
 ### Getting Started:
 
