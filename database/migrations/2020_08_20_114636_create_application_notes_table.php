@@ -14,11 +14,19 @@ class CreateApplicationNotesTable extends Migration
     public function up()
     {
         Schema::create('application_notes', function (Blueprint $table) {
+
+            //columns for the note data inputs
             $table->id();
-            $table->set('category', ['comment', 'task', 'event', 'link'])->default('comment');
+            $table->string('note_name', 50);
             $table->date('date');
             $table->string('body', 500);
             $table->timestamps();
+
+            //create a job id column
+            $table->foreignId('job_id')->unsigned();
+
+            //assign the id from jobs table to the job_id column
+            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
         });
     }
 

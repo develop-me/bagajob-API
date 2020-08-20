@@ -20,13 +20,13 @@ class CreateJobsTable extends Migration
             $table->set('status', ['active', 'archived'])->default('active');
             $table->string('location', 50);
             $table->decimal('salary')->nullable();
-            $table->date('closing_date')->nullable();
-            $table->date('application_date')->nullable();
+            $table->dateTime('closing_date')->nullable();
+            $table->dateTime('application_date')->nullable();
             $table->text('description')->nullable();
             $table->string('recruiter_name')->nullable();
             $table->string('recruiter_email')->nullable();
             $table->string('recruiter_phone',9)->nullable();
-            $table->enum('stage', [1,2,3]);
+            $table->enum('stage', [1,2,3,4]);
             $table->timestamps();
         });
     }
