@@ -17,7 +17,7 @@ class CreateJobsTable extends Migration
             $table->id();
             $table->string('job_title', 50);
             $table->string('company', 50);
-            $table->set('status', ['active', 'archived']);
+            $table->set('status', ['active', 'archived'])->default('active');
             $table->string('location', 50);
             $table->decimal('salary')->nullable();
             $table->date('closing_date')->nullable();
@@ -25,7 +25,7 @@ class CreateJobsTable extends Migration
             $table->text('description')->nullable();
             $table->string('recruiter_name')->nullable();
             $table->string('recruiter_email')->nullable();
-            $table->integer('recruiter_phone')->nullable();
+            $table->string('recruiter_phone',9)->nullable();
             $table->enum('stage', [1,2,3]);
             $table->timestamps();
         });
