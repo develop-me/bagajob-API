@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\API\JobRequest;
 
 class Jobs extends Controller
 {
@@ -24,7 +25,7 @@ class Jobs extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(JobRequest $request)
     {
         // returns an array of all the data the user sent
         $data = $request->all();
@@ -56,7 +57,7 @@ class Jobs extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Job $job)
+    public function update(JobRequest $request, Job $job)
     {
         //get the request data
         $data = $request->all();
