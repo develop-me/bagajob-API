@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Job;
 use App\Http\Requests\API\JobRequest;
+use App\Http\Resources\API\JobResource;
 
 class Jobs extends Controller
 {
@@ -16,7 +18,7 @@ class Jobs extends Controller
     public function index()
     {
         //get all the user's jobs
-        return Jobs::all();
+        return Job::all();
     }
 
     /**

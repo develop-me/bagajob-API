@@ -15,6 +15,8 @@ class InterviewResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
+            'job_id' => $this->job_id,
             'interview_date' => $this->interview_date,
             'format' => $this->format,
             'interviewer' => $this->interviewer,

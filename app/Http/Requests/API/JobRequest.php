@@ -36,7 +36,7 @@ class JobRequest extends FormRequest
             'recruiter name' => ['nullable', 'string'],
             'recruiter email' => ['nullable', 'email'],
             'recruiter phone' => ['nullable', 'string', 'max:9'],
-            'stage' => ['required', 'integer', 'between:,4'],
+            'stage' => ['required', 'integer', 'between:1,4'],
         ];
     }
 }

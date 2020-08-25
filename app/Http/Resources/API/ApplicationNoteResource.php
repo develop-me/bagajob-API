@@ -15,6 +15,8 @@ class ApplicationNoteResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
+            'job_id' => $this->job_id,
             'note_name' => $this->note_name,
             'date' => $this->date,
             'interviewer' => $this->interviewer,

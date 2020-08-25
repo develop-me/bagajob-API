@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Interview;
 use App\Http\Requests\API\InterviewRequest;
+use App\Http\Resources\API\InterviewResource;
 
 class Interviews extends Controller
 {
@@ -16,7 +18,7 @@ class Interviews extends Controller
     public function index()
     {
         //get all the user's interviews
-        return Interviews::all();
+        return Interview::all();
     }
 
     /**

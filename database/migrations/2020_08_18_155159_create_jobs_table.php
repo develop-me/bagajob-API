@@ -17,7 +17,7 @@ class CreateJobsTable extends Migration
             $table->id();
             $table->string('job_title', 50);
             $table->string('company', 50);
-            $table->set('status', ['active', 'archived'])->default('active');
+            $table->boolean('active')->default(true);
             $table->string('location', 50);
             $table->decimal('salary')->nullable();
             $table->dateTime('closing_date')->nullable();

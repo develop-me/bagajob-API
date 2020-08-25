@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Application_Note;
 use App\Http\Requests\API\ApplicationNoteRequest;
+use App\Http\Resources\API\ApplicationNoteResource;
 
 class ApplicationNotes extends Controller
 {
@@ -16,7 +18,7 @@ class ApplicationNotes extends Controller
     public function index()
     {
         //get all application notes
-        return ApplicationNotes::all();
+        return Application_Note::all();
     }
 
     /**
@@ -32,7 +34,7 @@ class ApplicationNotes extends Controller
 
         // creates an application note with the user data, store in DB and return it as JSON
         // NOTE: automatically gets 201 status as it's a POST request
-        $applicationnote = ApplicationNote::create($data);
+        $applicationnote = Application_Note::create($data);
 
         //returns a new resource with selected fields
         return new ApplicationNoteResource($applicationnote);
@@ -44,7 +46,7 @@ class ApplicationNotes extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ApplicationNote $applicationnote)
+    public function show(Application_Note $applicationnote)
     {
         //return the note requested in the URL
         return new ApplicationNoteResource($applicationnote);
@@ -57,7 +59,7 @@ class ApplicationNotes extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ApplicationNoteRequest $request, ApplicationNote $applicationnote)
+    public function update(ApplicationNoteRequest $request, Application_Note $applicationnote)
     {
         //get the request data
         $data = $request->all();
@@ -75,10 +77,10 @@ class ApplicationNotes extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Application_Note $applicationnote)
     {
         //delete the note from the DB
-        $job->delete();
+        $applicationnote->delete();
 
         //use 204 code as there will be no content in the response
         return response(null, 204);

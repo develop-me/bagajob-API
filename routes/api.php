@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\Jobs;
+use App\Http\Controllers\API\ApplicationNotes;
+use App\Http\Controllers\API\Interviews;
 
 /*
 |--------------------------------------------------------------------------
