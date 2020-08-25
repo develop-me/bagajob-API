@@ -21,7 +21,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'jobs'], function () {
+Route::group(['prefix' => 'jobs',
+            'middleware' => ['auth:api'],
+            ], function () {
 
     //GET /jobs: show all jobs for user
     Route::get('', [Jobs::class, 'index']);
