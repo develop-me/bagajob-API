@@ -27,7 +27,8 @@ class CreateJobsTable extends Migration
             $table->string('recruiter_email')->nullable();
             $table->string('recruiter_phone',9)->nullable();
             $table->enum('stage', [1,2,3,4]);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
