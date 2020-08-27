@@ -27,8 +27,8 @@ class JobRequest extends FormRequest
             //validation rules for job entry creation
             'job_title' => ['required', 'string', 'max:50'],
             'company' => ['required', 'string', 'max:50'],
-            'status' => ['required', 'string', 'max:8'],
-            'location' => ['required', 'string', 'max:50'],
+            'active' => ['required', 'numeric'],
+            'location' => ['nullable', 'string', 'max:50'],
             'salary' => ['nullable', 'numeric'],
             'closing date' => ['nullable', 'date'],
             'date applied' => ['nullable', 'date'],

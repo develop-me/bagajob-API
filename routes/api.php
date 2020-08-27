@@ -21,15 +21,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'jobs',
-            'middleware' => ['auth:api'],
-            ], function () {
+Route::group(['prefix' => 'jobs'], function () {
 
     //GET /jobs: show all jobs for user
     Route::get('', [Jobs::class, 'index']);
 
     //POST /jobs: create a new job entry
-    Route::get('', [Jobs::class, 'store']);
+    Route::post('', [Jobs::class, 'store']);
 
     //the following are targeted at one job entry i.e. have an id in the end point
     Route::group(['prefix' => '{job}'], function () {
