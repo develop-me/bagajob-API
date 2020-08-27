@@ -42,4 +42,4 @@ npm-debug.log
 yarn-error.log
 
 # Vagrant files
-/.vagrant
+/vagrant
