@@ -18,7 +18,9 @@ The Virtual Machine is already configured from ScotchBox, and the Vagrant Box se
 1. Update password your `.env` file
 1. Run `vagrant up`
 1. Login to the virtual machine: `vagrant ssh`
-1.  Navigate to new `code` folder: `cd code`
+1. Navigate to new `code` folder: `cd code`
+1. Run the database migrations: `artisan migrate`
+1. Seed the database with example data: `artisan db:seed`
 
 Visit `http://homestead.test` on Mac or `http://localhost:8000` on Windows:
 
@@ -33,7 +35,6 @@ A:
 Reload the vagrant box and provision it:
 
 `vagrant reload --provision`
-
 
 Generate a new app key:
 
@@ -65,6 +66,102 @@ Next, initialise the plugin:
 
 `vagrant vbguest`
 
+---
+
+# Bagajob API
+
+## General
+
+All requests should:
+
+- Use the basename `https://homestead.test/api/`
+- Be sent using JSON and with the `Accept: application/json` header.
+
+End point(s):
+
+- `/api/jobs`
+- ``
+
+### Jobs - `/api/jobs`
+
+#### `GET /api/jobs`
+
+Returns all jobs as JSON object:
+
+```
+{
+        "id": 2,
+        "job_title": "Compacting Machine Operator",
+        "company": "McLaughlin, Johnston and Koepp",
+        "active": 1,
+        "location": "East Kaceybury",
+        "salary": "20444.00",
+        "closing_date": "2020-09-05 10:02:52",
+        "application_date": null,
+        "description": "Sunt ratione velit cumque ipsam nihil soluta. Ut asperiores ab excepturi laboriosam porro. Error voluptatibus beatae non. Et sunt omnis sed velit. Quia qui corrupti autem facilis.",
+        "recruiter_name": null,
+        "recruiter_email": null,
+        "recruiter_phone": null,
+        "stage": "1",
+        "created_at": "2020-08-27T13:17:46.000000Z",
+        "updated_at": "2020-08-27T13:17:46.000000Z"
+    },
+    {
+        "id": 3,
+        "job_title": "Power Distributors OR Dispatcher",
+        "company": "Kuphal-Wunsch",
+        "active": 1,
+        "location": "Larissachester",
+        "salary": "59962.00",
+        "closing_date": "2020-12-08 13:56:00",
+        "application_date": null,
+        "description": "Numquam dolor voluptas quia et temporibus aut facilis. Quam assumenda in cum ducimus enim. Sit sapiente et magni et blanditiis. Accusantium est porro voluptatibus velit nostrum. Laborum quas optio quod pariatur.",
+        "recruiter_name": null,
+        "recruiter_email": null,
+        "recruiter_phone": null,
+        "stage": "1",
+        "created_at": "2020-08-27T13:17:46.000000Z",
+        "updated_at": "2020-08-27T13:17:46.000000Z"
+    },
+```
+
+**Does not return interviews, notes or users associated with those jobs.**
+
+#### `GET /jobs/:id`
+
+Returns an individual job as JSON object where `:id` is a job ID
+
+```
+{
+        "id": 17,
+        "job_title": "Electrotyper",
+        "company": "Satterfield-Dach",
+        "active": 1,
+        "location": "Archland",
+        "salary": "30601.00",
+        "closing_date": "2021-01-20 07:00:04",
+        "application_date": null,
+        "description": "Nihil illum quam id et natus deserunt. Et eius porro ex. Deleniti nulla libero doloribus et laudantium eius. Quos voluptatem maxime soluta. Repellendus voluptatem neque est facere facere atque.",
+        "recruiter_name": null,
+        "recruiter_email": null,
+        "recruiter_phone": null,
+        "stage": "1",
+        "created_at": "2020-08-27T13:17:46.000000Z",
+        "updated_at": "2020-08-27T13:17:46.000000Z"
+    },
+```
+
+#### `POST /api/jobs`
+
+Adds a job to the database. The below is the minimum required JSON, all other fields optional.
+```
+{
+    "job_title" : "Senior Java Developer",
+    "company" : "Green Software Inc.",
+    "stage" : 1,
+    "active": 1
+}
+```
 ---
 
 ## Laravel
