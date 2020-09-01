@@ -6,6 +6,9 @@ use App\Http\Controllers\API\Jobs;
 use App\Http\Controllers\API\ApplicationNotes;
 use App\Http\Controllers\API\Interviews;
 
+use Laravel\Passport\Http\Controllers\AccessTokenController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,8 +20,10 @@ use App\Http\Controllers\API\Interviews;
 |
 */
 
-// Authentication Routes
-Route::post('login', 'API\AuthController@login');
+// Login using passports AccessTokenController controller
+Route::post('login', [AccessTokenController::class, 'issueToken'])->middleware(['api-login', 'throttle']);;
+
+// Registration using our AuthController
 Route::post('register', 'API\AuthController@register');
 
 Route::middleware('auth:api')->group(function(){

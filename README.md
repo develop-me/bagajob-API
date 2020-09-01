@@ -126,6 +126,52 @@ All requests should:
 }
 ```
 
+### Login User - POST `/api/login`
+
+#### Request
+```json
+{
+    "username": "test@test2.com", // REQ, valid user email
+    "password": "iliketurtles" // REQ, password
+}
+```
+
+#### Responses
+
+##### Failures
+- Missing username/password
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed.",
+    "hint": "Check the `< missing >` parameter",
+    "message": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed."
+}
+```
+- Invalid username/password
+
+```json
+{
+    "error": "invalid_grant",
+    "error_description": "The provided authorization grant (e.g., authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.",
+    "hint": "",
+    "message": "The provided authorization grant (e.g., authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."
+}
+```
+
+##### Success
+```json
+{
+    "token_type": "Bearer",
+    "expires_in": 31536000,
+    "access_token": "<token>",
+    "refresh_token": "<token>"
+}
+```
+
+##### Failures
+
 ### Jobs - `/api/jobs`
 
 #### `GET /api/jobs`
