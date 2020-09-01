@@ -1,5 +1,5 @@
 # BagaJob - The Definitive Job Hunting Management App
-## Back-end Architecture - Laravel Blade
+## Back-end Architecture - Laravel
 
 ### Collaborating:
 
@@ -7,7 +7,7 @@
 
 ### Getting Started:
 
-The Virtual Machine is already configured from ScotchBox, and the Vagrant Box set up to use Laravel's Homestead. To get started:
+The Vagrant Box set up to use Laravel's Homestead image. To get started:
 
 1. Clone this repo and `cd` into folder
 1. In your new directory, run `composer install`
@@ -77,10 +77,54 @@ All requests should:
 - Use the basename `https://homestead.test/api/`
 - Be sent using JSON and with the `Accept: application/json` header.
 
-End point(s):
+## End points:
+### Register User - POST `/api/register`
 
-- `/api/jobs`
-- ``
+#### Request
+```json
+{
+    "name": "Test User 1", // REQ, full name
+    "email": "test@test2.com", // REQ, valid email, not duplicate
+    "password": "iliketurtles" // REQ, password
+}
+```
+
+#### Responses
+
+##### Success
+```json
+{
+    "success": {
+        "token": "<token>"
+    }
+}
+```
+
+##### Failures
+- Missing name
+- Missing email
+- Missing password
+- Duplicate User (email must be unqiue)
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "name": [
+            "A name is required to create a user account"
+        ],
+        "email": [
+            "A email is required to create a user account"
+        ],
+        "password": [
+            "A password is required to create a user account"
+        ],
+        "email": [
+            "A user account exists already with this email"
+        ],
+    }
+}
+```
 
 ### Jobs - `/api/jobs`
 
@@ -88,7 +132,7 @@ End point(s):
 
 Returns all jobs as JSON object:
 
-```
+```json
 {
         "id": 2,
         "job_title": "Compacting Machine Operator",
@@ -131,7 +175,7 @@ Returns all jobs as JSON object:
 
 Returns an individual job as JSON object where `:id` is a job ID
 
-```
+```json
 {
         "id": 17,
         "job_title": "Electrotyper",
@@ -154,7 +198,7 @@ Returns an individual job as JSON object where `:id` is a job ID
 #### `POST /api/jobs`
 
 Adds a job to the database. The below is the minimum required JSON, all other fields optional.
-```
+```json
 {
     "job_title" : "Senior Java Developer",
     "company" : "Green Software Inc.",

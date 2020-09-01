@@ -17,9 +17,15 @@ use App\Http\Controllers\API\Interviews;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Authentication Routes
+Route::post('login', 'API\AuthController@login');
+Route::post('register', 'API\AuthController@register');
+
+Route::middleware('auth:api')->group(function(){
+ 
+    Route::post('user_detail', 'API\AuthController@user_detail');
+    
+  });
 
 Route::group(['prefix' => 'jobs'], function () {
 

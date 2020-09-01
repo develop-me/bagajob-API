@@ -9,6 +9,8 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
+    public $timestamps = false;
+    
     use HasApiTokens, Notifiable;
 
     /**
