@@ -84,7 +84,7 @@ All requests should:
 ```json
 {
     "name": "Test User 1", // REQ, full name
-    "email": "test@test2.com", // REQ, valid email, not duplicate
+    "email": "test@test2.com", // REQ, valid email, not the same as another in the database
     "password": "iliketurtles" // REQ, password
 }
 ```
@@ -138,6 +138,16 @@ All requests should:
 
 #### Responses
 
+##### Success
+```json
+{
+    "token_type": "Bearer",
+    "expires_in": 31536000,
+    "access_token": "<token>",
+    "refresh_token": "<token>"
+}
+```
+
 ##### Failures
 - Missing username/password
 
@@ -160,17 +170,13 @@ All requests should:
 }
 ```
 
-##### Success
+### Not Logged In/Unauthenticated
+- If the frontend tries to make a request to any of the following routes without the proper Bearer Token, they will recieve this response:
 ```json
 {
-    "token_type": "Bearer",
-    "expires_in": 31536000,
-    "access_token": "<token>",
-    "refresh_token": "<token>"
+    "message": "Unauthenticated."
 }
 ```
-
-##### Failures
 
 ### Jobs - `/api/jobs`
 
