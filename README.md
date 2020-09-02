@@ -171,7 +171,7 @@ All requests should:
 ```
 
 ### Not Logged In/Unauthenticated
-- If the frontend tries to make a request to any of the following routes without the proper Bearer Token, they will recieve this response:
+- If the frontend tries to make a request to any of the non-authentication workflow related routes without the proper Bearer Token, they will receive this response:
 ```json
 {
     "message": "Unauthenticated."
