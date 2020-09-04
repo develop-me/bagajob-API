@@ -83,9 +83,9 @@ All requests should:
 #### Request
 ```json
 {
-    "name": "Test User 1", // REQ, full name
-    "email": "test@test2.com", // REQ, valid email, not the same as another in the database
-    "password": "iliketurtles" // REQ, password
+    "name": "<user name>", // REQ, full name
+    "email": "<email>", // REQ, valid email, not the same as another in the database
+    "password": "<password>" // REQ, password
 }
 ```
 
@@ -93,9 +93,15 @@ All requests should:
 
 ##### Success
 ```json
-{
+{  
     "success": {
         "token": "<token>"
+    },
+    "user": {
+        "id": "<ID>",
+        "name": "<user name>",
+        "email": "<email>",
+        "created_at": "2020-09-01 14:22:46"
     }
 }
 ```
@@ -129,10 +135,11 @@ All requests should:
 ### Login User - POST `/api/login`
 
 #### Request
+- ***NOTE: `username` maps to `email` in this case***
 ```json
 {
-    "username": "test@test2.com", // REQ, valid user email
-    "password": "iliketurtles" // REQ, password
+    "username": "<user email>", // REQ, valid user email
+    "password": "<password>" // REQ, password
 }
 ```
 
@@ -144,7 +151,13 @@ All requests should:
     "token_type": "Bearer",
     "expires_in": 31536000,
     "access_token": "<token>",
-    "refresh_token": "<token>"
+    "refresh_token": "<token>",
+    "user": {
+        "id": 20,
+        "name": "<user name>",
+        "email": "<email>",
+        "created_at": "2020-09-01 14:22:46"
+    }
 }
 ```
 
@@ -156,7 +169,7 @@ All requests should:
     "error": "invalid_request",
     "error_description": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed.",
     "hint": "Check the `< missing >` parameter",
-    "message": "The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed."
+    "message": "<same as error_description>"
 }
 ```
 - Invalid username/password
@@ -166,7 +179,7 @@ All requests should:
     "error": "invalid_grant",
     "error_description": "The provided authorization grant (e.g., authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client.",
     "hint": "",
-    "message": "The provided authorization grant (e.g., authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to another client."
+    "message": "<same as error_description>"
 }
 ```
 
@@ -177,6 +190,174 @@ All requests should:
     "message": "Unauthenticated."
 }
 ```
+
+### Forgot Password / Password Reset Routes
+
+### `POST /api/reset-password-without-token`
+
+#### Request
+```json
+{
+    "email": "<email>", // REQ, valid user email
+}
+```
+
+#### Responses
+
+##### Success
+```json
+{
+    "message": "Reset Password email successfully sent"
+}
+```
+
+##### Failure
+- No email supplied/invalid email format
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "email": [
+            "An email is required to reset the password" // "A valid email must be used to reset the password"
+        ]
+    }
+}
+```
+
+- User does not exist with that email
+
+```json
+{
+    "message": "An account does not exist with this email address"
+}
+```
+
+- Email failed
+```json
+{
+    "message": "An error has occured sending the reset password email, please try again",
+    "error": "<error message>"
+}
+
+
+```
+### `POST /api/reset-password-with-token`
+
+#### Request
+```json
+{
+    "email": "<email>", // REQ, valid user email
+    "password": "<new password>", // REQ, new password
+    "token": "<reset token>", // REQ, valid reset token from email
+}
+```
+
+#### Responses
+
+##### Success
+```json
+{
+    "message": "Password Reset Successful",
+    "user": {
+        "id": 21,
+        "name": "<name>",
+        "email": "<email>",
+        "created_at": "2020-09-03 11:16:06"
+    },
+    "token": "<bearer token>"
+}
+```
+
+##### Failure
+- Similar email, password, token validation as before (required)
+- Invalid token, or they've already reset their password
+```json
+{
+    "message": "Password token invalid, please submit a new password reset request"
+}
+```
+
+### Update User Account - PATCH `/api/user/{user id}`
+
+#### Request
+```json
+{
+    "email": "<email>", // OPT, valid user email, not duplicate
+    "name": "<user name>" // OPT, string
+}
+```
+
+#### Responses
+
+##### Success
+- Returns the user object
+```json
+{
+    "user": {
+        "id": 23,
+        "name": "NickelNood",
+        "email": "nosvalds@gmail.com",
+        "created_at": "2020-09-04 14:15:57"
+    }
+}
+```
+
+##### Failures
+- Trying to update a different user than you are logged in as
+```json
+{
+    "message": "You cannot edit a user other than your own"
+}
+```
+
+- Trying to update to a Duplicate email in the database
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "email": [
+            "A user account exists already with this email"
+        ]
+    }
+}
+```
+
+- Incorrect format(s) name or email
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "email": [
+            "The email must be a valid email address."
+        ]
+    }
+}
+```
+
+### DELETE User Account - DELETE `/api/user/{user id}`
+
+#### Responses
+
+##### Success
+- Returns a 204 - No Content response
+
+##### Failures
+- Trying to delete a user other than your own
+```json
+{
+    "message": "You cannot delete a user other than your own"
+}
+```
+- Trying to delete a user that does not exist
+```json
+{
+    "message": "No query results for model [App\\User] <ID>"
+}
+```
+
+
 
 ### Jobs - `/api/jobs`
 
