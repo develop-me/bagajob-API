@@ -9,15 +9,18 @@
 
 The Vagrant Box set up to use Laravel's Homestead image. To get started:
 
-1. Clone this repo and `cd` into folder
+1. Clone this repo and `cd` into the new directory
 1. In your new directory, run `composer install`
 1. Run `vendor/bin/homestead make`
 1. Copy the `.env.example` file to a new `.env` file:
 `cp .env.example .env`
 
-1. Update password your `.env` file
+1. Update passwords in your `.env` file
+    - If you need email, set these api keys as well, they can be accessed from the [bagajob mailjet account](https://app.mailjet.com/account/api_keys)
+        - MAILJET_APIKEY= *****
+        - MAILJET_APISECRET= *****
 1. Run `vagrant up`
-1. Login to the virtual machine: `vagrant ssh`
+1. ssh to the virtual machine: `vagrant ssh`
 1. Navigate to new `code` folder: `cd code`
 1. Run the database migrations: `artisan migrate`
 1. Seed the database with example data: `artisan db:seed`
@@ -28,6 +31,17 @@ Visit `http://homestead.test` on Mac or `http://localhost:8000` on Windows:
 
 
 ### Troubleshooting:
+
+### Q: When I run `composer install` I get a memory error
+A: 
+
+First, make sure you're only running this on your local machine and NOT the Vagrant box.
+
+Second, run this command to increase your memory limit, you can use -1 to make it unlimited if neccessary.
+`php -d memory_limit=-1 $(which composer) update`
+
+Also see this page:
+https://getcomposer.org/doc/articles/troubleshooting.md#memory-limit-errors
 
 #### Q: When I visit `http://homestead.test` on Mac or `http://localhost:8000` on Windows, I get an Error 500: Internal Server Error
 A:
@@ -296,7 +310,7 @@ All requests should:
 {
     "user": {
         "id": 23,
-        "name": "NickelNood",
+        "name": "<name>",
         "email": "nosvalds@gmail.com",
         "created_at": "2020-09-04 14:15:57"
     }
