@@ -131,7 +131,10 @@ return [
 
     'custom' => [
         'attribute-name' => [
-            'rule-name' => 'custom-message',
+            'name.required' => 'A :attribute is required to register',
+            'email.required' => 'A :attribute is required to register',
+            'password.required' => 'A :attribute is required to register',
+            'email.unique' => 'A user account already exists with email :attribute'
         ],
     ],
 

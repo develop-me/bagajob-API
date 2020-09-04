@@ -6,6 +6,10 @@ use App\Http\Controllers\API\Jobs;
 use App\Http\Controllers\API\ApplicationNotes;
 use App\Http\Controllers\API\Interviews;
 
+use Laravel\Passport\Http\Controllers\AccessTokenController;
+use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,32 +21,72 @@ use App\Http\Controllers\API\Interviews;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
+/* 
+    /login - Login using our passport standard contoller
+*/
+Route::post('login', [AccessTokenController::class, 'issueToken'])->middleware(['api-login', 'throttle','api-login-add-user']);
 
-Route::group(['prefix' => 'jobs'], function () {
+/* 
+|   /register - Registration using our AuthController
+*/
+Route::post('register', [AuthController::class, 'register']);
 
-    //GET /jobs: show all jobs for user
-    Route::get('', [Jobs::class, 'index']);
+// Forgot Password / Reset Routes
 
-    //POST /jobs: create a new job entry
-    Route::post('', [Jobs::class, 'store']);
+/* 
+|   /reset-password-without-token - Generates the reset password token and email
+*/
+Route::post('reset-password-without-token', [AuthController::class, 'validatePasswordRequest']);
 
-    //the following are targeted at one job entry i.e. have an id in the end point
-    Route::group(['prefix' => '{job}'], function () {
-        
-        //GET /jobs/2: show the job with id of 2
-        Route::get('', [Jobs::class, 'show']);
+/* 
+|    /reset-password-with-token - Resets password and sends confirmation email
+*/
+Route::post('reset-password-with-token', [AuthController::class, 'resetPassword']); 
 
-        //PUT /jobs/2: update the job with id of 2
-        Route::put('', [Jobs::class, 'update']);
+/*
+|--------------------------------------------------------------------------
+| Application/Workflow Routes
+|--------------------------------------------------------------------------
+*/
+// require auth:api middleware for these routes
+Route::middleware('auth:api')->group(function() {
 
-        //DELETE /jobs/2: delete the job with id of 2
-        Route::delete('', [Jobs::class, 'destroy']);
+    // Users
+    // PATCH /{user ID} route for updating account details
+    Route::patch('user/{user}', [UserController::class, 'updateAccountDetails']);
+
+    // DELETE /{user ID} route for deleting account
+    Route::delete('user/{user}', [UserController::class, 'destroy']);
+ 
+    // Jobs
+    Route::group(['prefix' => 'jobs'], function() {
+
+        //GET /jobs: show all jobs for user
+        Route::get('', [Jobs::class, 'index']);
     
+        //POST /jobs: create a new job entry
+        Route::post('', [Jobs::class, 'store']);
+    
+        //the following are targeted at one job entry i.e. have an id in the end point
+        Route::group(['prefix' => '{job}'], function() {
+            
+            //GET /jobs/2: show the job with id of 2
+            Route::get('', [Jobs::class, 'show']);
+    
+            //PUT /jobs/2: update the job with id of 2
+            Route::put('', [Jobs::class, 'update']);
+    
+            //DELETE /jobs/2: delete the job with id of 2
+            Route::delete('', [Jobs::class, 'destroy']);
+        });
     });
-
 });
+
+
 
 
