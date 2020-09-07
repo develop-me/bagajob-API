@@ -30,10 +30,9 @@ The Vagrant Box set up to use Laravel's Homestead image. To get started:
 1. Run the database migrations: `artisan migrate`
 1. Seed the database with example data: `artisan db:seed`
     - `UsersTableSeeder.php` will add the admin user 
-        - name: Bagajob Admin
-        - email: bagajob.mail@gmail.com
-        - password: ******* 
     - `JobsTableSeeder.php` adds 10 Users, each with 10 jobs associated.
+1. Create the Passport authentication keys: `php artisan passport:install`
+
 
 Visit `http://homestead.test` on Mac or `http://localhost:8000` on Windows:
 
