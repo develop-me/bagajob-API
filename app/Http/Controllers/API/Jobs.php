@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Job;
 use App\Http\Requests\API\JobRequest;
 use App\Http\Resources\API\JobResource;
+use App\User;
 
 class Jobs extends Controller
 {

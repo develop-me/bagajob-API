@@ -13,19 +13,10 @@ class JobsTableSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create();
-        foreach(range(1, 100) as $index) {
-
-            DB::table('jobs')->insert([
-                'job_title' => $faker->jobTitle(),
-                'company' => $faker->company(),
-                'stage' => 1,
-                'description' => $faker->sentences($nb = 5, $asText = true),
-                'salary' => $faker->numberBetween($min = 16000, $max = 60000),
-                'closing_date' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+1 years', $timezone = 'GMT'),
-                'location' => $faker->city(),
-            ]);
-        }
-
+        // create 10 users, for each user create and asssociate 10 jobs with that user
+        factory(App\User::class, 10)->create()->each(function ($user)
+        {
+            $user->jobs()->saveMany(factory(App\Job::class, 10)->make());
+        });
     }
 }

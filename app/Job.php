@@ -28,6 +28,13 @@ class Job extends Model
         'company'
     ];
 
+    // User Relationship
+    public function user()
+    {
+        // a job belongs to a user
+        return $this->belongsTo(User::class);
+    }
+
     public function notes()
     {
         //job can have many notes attached
