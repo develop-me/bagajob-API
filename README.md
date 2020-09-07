@@ -311,7 +311,7 @@ All requests should:
     "user": {
         "id": 23,
         "name": "<name>",
-        "email": "nosvalds@gmail.com",
+        "email": "<email>",
         "created_at": "2020-09-04 14:15:57"
     }
 }
