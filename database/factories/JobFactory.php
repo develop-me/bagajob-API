@@ -14,6 +14,5 @@ $factory->define(Job::class, function (Faker $faker) {
         'salary' => $faker->numberBetween($min = 16000, $max = 60000),
         'closing_date' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+1 years', $timezone = 'GMT'),
         'location' => $faker->city(),
-        //'user_id' => factory(App\User::class)
     ];
 });
