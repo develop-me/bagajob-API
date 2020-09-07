@@ -16,14 +16,23 @@ The Vagrant Box set up to use Laravel's Homestead image. To get started:
 `cp .env.example .env`
 
 1. Update passwords in your `.env` file
+    - The admin user is controlled by these environment variables and will be created when the database is seeded
+        - ADMIN_USER_NAME="Bagajob Admin"
+        - ADMIN_USER_EMAIL=bagajob.mail@gmail.com
+        - ADMIN_USER_PASSWORD= *****
     - If you need email, set these api keys as well, they can be accessed from the [bagajob mailjet account](https://app.mailjet.com/account/api_keys)
         - MAILJET_APIKEY= *****
         - MAILJET_APISECRET= *****
+    - 
 1. Run `vagrant up`
 1. ssh to the virtual machine: `vagrant ssh`
 1. Navigate to new `code` folder: `cd code`
 1. Run the database migrations: `artisan migrate`
 1. Seed the database with example data: `artisan db:seed`
+    - `UsersTableSeeder.php` will add the admin user 
+    - `JobsTableSeeder.php` adds 10 Users, each with 10 jobs associated.
+1. Create the Passport authentication keys: `php artisan passport:install`
+
 
 Visit `http://homestead.test` on Mac or `http://localhost:8000` on Windows:
 
