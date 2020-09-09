@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Interview;
 use App\Http\Requests\API\InterviewRequest;
 use App\Http\Resources\API\InterviewResource;
+use App\Job;
+use App\User;
 
 class Interviews extends Controller
 {
@@ -15,10 +17,10 @@ class Interviews extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user, Job $job)
     {
-        //get all the user's interviews
-        return Interview::all();
+        // get all the interviews associated with the job passed in the URL
+        return InterviewResource::collection($job->interviews);
     }
 
     /**
@@ -27,17 +29,17 @@ class Interviews extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InterviewRequest $request)
+    public function store(User $user, Job $job, InterviewRequest $request)
     {
-        // returns an array of all the data the user sent
+        // returns an array of all the data the form sent
         $data = $request->all();
 
-        // creates an Interview with the user data, store in DB and return it as JSON
+        // creates an Interview with the form data, store in DB and return it as JSON
         // NOTE: automatically gets 201 status as it's a POST request
-        $interview = Interview::create($data);
+        $new_interview = $job->interviews()->create($data);
 
         //returns a new resource with selected fields
-        return new InterviewResource($interview);
+        return new InterviewResource($new_interview);
     }
 
     /**
@@ -46,7 +48,7 @@ class Interviews extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Interview $interview)
+    public function show(User $user, Job $job, Interview $interview)
     {
         //return the interview specified in the URL
         return new InterviewResource($interview);
@@ -59,7 +61,7 @@ class Interviews extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(InterviewRequest $request, Interview $interview)
+    public function update(InterviewRequest $request, User $user, Job $job, Interview $interview)
     {
         //get the request data
         $data = $request->all();
@@ -77,7 +79,7 @@ class Interviews extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Interview $interview)
+    public function destroy(User $user, Job $job, Interview $interview)
     {
         //delete the interview from the DB
         $interview->delete();

@@ -9,6 +9,7 @@ use App\Http\Controllers\API\Interviews;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\UserController;
+use App\Interview;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,18 +74,40 @@ Route::middleware('auth:api')->group(function() {
             //POST /jobs: create a new job entry
             Route::post('', [Jobs::class, 'store']);
             
-            // ~/jobs/{jobId}
+            // ~/{jobId}
             // The following are targeted at one job entry i.e. have an id in the end point
             Route::group(['prefix' => '{job}'], function() {
                 
                 //GET /jobs/{id}: show the job with id 
                 Route::get('', [Jobs::class, 'show']);
         
-                //PUT /jobs/{id}: update the job with id
-                Route::put('', [Jobs::class, 'update']);
+                //PATCH /jobs/{id}: update the job with id
+                Route::patch('', [Jobs::class, 'update']);
         
                 //DELETE /jobs/{id}: delete the job with id
                 Route::delete('', [Jobs::class, 'destroy']);
+
+                // Interviews ~/interviews
+                Route::group(['prefix' => 'interviews'], function() {
+                    //GET /interviews: show all interview for job
+                    Route::get('', [Interviews::class, 'index']);
+                
+                    //POST /interviews: create a new job entry
+                    Route::post('', [Interviews::class, 'store']);
+
+                    // ~/{interviewId}
+                    Route::group(['prefix' => '{interview}'], function() {
+                
+                        //GET /interviews/{id}: show the interview with id 
+                        Route::get('', [Interviews::class, 'show']);
+                
+                        //PATCH /interviews/{id}: update the interview with id
+                        Route::patch('', [Interviews::class, 'update']);
+                
+                        //DELETE /interviews/{id}: delete the interview with id
+                        Route::delete('', [Interviews::class, 'destroy']);
+                    });
+                });
             });
         });
     });

@@ -60,7 +60,7 @@ class Jobs extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(JobRequest $request, Job $job)
+    public function update(JobRequest $request, User $user, Job $job)
     {
         //get the request data
         $data = $request->all();
@@ -78,7 +78,7 @@ class Jobs extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+    public function destroy(User $user, Job $job)
     {
         //delete the job from the DB
         $job->delete();
