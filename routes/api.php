@@ -56,33 +56,36 @@ Route::post('reset-password-with-token', [AuthController::class, 'resetPassword'
 // require auth:api middleware for these routes
 Route::middleware('auth:api')->group(function() {
 
-    // Users
-    // PATCH /{user ID} route for updating account details
-    Route::patch('user/{user}', [UserController::class, 'updateAccountDetails']);
+    // Users /user/{userId}
+    Route::group(['prefix' => 'user/{user}'], function() {
+        // PATCH /{user ID} route for updating account details
+        Route::patch('', [UserController::class, 'updateAccountDetails']);
 
-    // DELETE /{user ID} route for deleting account
-    Route::delete('user/{user}', [UserController::class, 'destroy']);
- 
-    // Jobs
-    Route::group(['prefix' => 'jobs'], function() {
+        // DELETE /{user ID} route for deleting account
+        Route::delete('', [UserController::class, 'destroy']);
+    
+        // Jobs ~/jobs/
+        Route::group(['prefix' => 'jobs'], function() {
 
-        //GET /jobs: show all jobs for user
-        Route::get('', [Jobs::class, 'index']);
-    
-        //POST /jobs: create a new job entry
-        Route::post('', [Jobs::class, 'store']);
-    
-        //the following are targeted at one job entry i.e. have an id in the end point
-        Route::group(['prefix' => '{job}'], function() {
+            //GET /jobs: show all jobs for user
+            Route::get('', [Jobs::class, 'index']);
+        
+            //POST /jobs: create a new job entry
+            Route::post('', [Jobs::class, 'store']);
             
-            //GET /jobs/2: show the job with id of 2
-            Route::get('', [Jobs::class, 'show']);
-    
-            //PUT /jobs/2: update the job with id of 2
-            Route::put('', [Jobs::class, 'update']);
-    
-            //DELETE /jobs/2: delete the job with id of 2
-            Route::delete('', [Jobs::class, 'destroy']);
+            // ~/jobs/{jobId}
+            // The following are targeted at one job entry i.e. have an id in the end point
+            Route::group(['prefix' => '{job}'], function() {
+                
+                //GET /jobs/{id}: show the job with id 
+                Route::get('', [Jobs::class, 'show']);
+        
+                //PUT /jobs/{id}: update the job with id
+                Route::put('', [Jobs::class, 'update']);
+        
+                //DELETE /jobs/{id}: delete the job with id
+                Route::delete('', [Jobs::class, 'destroy']);
+            });
         });
     });
 });

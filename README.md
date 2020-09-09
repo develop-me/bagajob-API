@@ -101,6 +101,39 @@ All requests should:
 - Be sent using JSON and with the `Accept: application/json` header.
 
 ## End points:
+Registration and Login
+- `POST /register`
+- `POST /login`
+- `POST /api/reset-password-without-token`
+- `POST /api/reset-password-with-token`
+
+Users
+- `PATCH /user/{userId}`
+- `DELETE /user/{userId}`
+
+Jobs
+- `GET /user/{userId}/jobs`
+- `POST /user/{userId}/jobs`
+- `GET /user/{userId}/jobs/{jobId}`
+- `PATCH /user/{userId}/jobs/{jobId}`
+- `DELETE /user/{userId}/jobs/{jobId}`
+
+Interviews
+- `GET /user/{userId}/jobs/{jobId}/interviews`
+- `POST /user/{userId}/jobs/{jobId}/interviews`
+- `GET /user/{userId}/jobs/{jobId}/interviews/{interviewId}`
+- `PATCH /user/{userId}/jobs/{jobId}/interviews/{interviewId}`
+- `DELETE /user/{userId}/jobs/{jobId}/interviews/{interviewId}`
+
+Application Notes
+- `GET /user/{userId}/jobs/{jobId}/app-notes`
+- `POST /user/{userId}/jobs/{jobId}/app-notes`
+- `GET /user/{userId}/jobs/{jobId}/app-notes/{appNoteId}`
+- `PATCH /user/{userId}/jobs/{jobId}/app-notes/{appNoteId}`
+- `DELETE /user/{userId}/jobs/{jobId}/app-notes/{appNoteId}`
+
+
+
 ### Register User - POST `/api/register`
 
 #### Request

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Job;
 use App\Http\Requests\API\JobRequest;
 use App\Http\Resources\API\JobResource;
+use App\Http\Resources\API\JobIndexResource;
 use App\User;
 
 class Jobs extends Controller
@@ -16,10 +16,10 @@ class Jobs extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
         //get all the user's jobs
-        return Job::all();
+        return JobIndexResource::collection($user->jobs);
     }
 
     /**
