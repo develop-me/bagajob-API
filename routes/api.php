@@ -108,6 +108,28 @@ Route::middleware('auth:api')->group(function() {
                         Route::delete('', [Interviews::class, 'destroy']);
                     });
                 });
+
+                // Application Notes ~/app-notes
+                Route::group(['prefix' => 'app-notes'], function() {
+                    //GET /app-notes: show all application notes for job
+                    Route::get('', [ApplicationNotes::class, 'index']);
+                
+                    //POST /app-notes: create a new application note
+                    Route::post('', [ApplicationNotes::class, 'store']);
+
+                    // ~/{noteId}
+                    Route::group(['prefix' => '{applicationnote}'], function() {
+                
+                        //GET /app-notes/{id}: show the notes with id 
+                        Route::get('', [ApplicationNotes::class, 'show']);
+                
+                        //PATCH /app-notes/{id}: update the notes with id
+                        Route::patch('', [ApplicationNotes::class, 'update']);
+                
+                        //DELETE /app-notes/{id}: delete the notes with id
+                        Route::delete('', [ApplicationNotes::class, 'destroy']);
+                    });
+                });
             });
         });
     });

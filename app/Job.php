@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Job extends Model
 {
-    //setting up the one to many relationship between jobs and other tables
-
     /**
      * The attributes that are mass assignable.
      *
@@ -38,7 +36,7 @@ class Job extends Model
     public function notes()
     {
         //job can have many notes attached
-        return $this->hasMany(Application_Note::class);
+        return $this->hasMany(ApplicationNote::class);
     }
 
     public function interviews()

@@ -4,9 +4,12 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Application_Note;
 use App\Http\Requests\API\ApplicationNoteRequest;
 use App\Http\Resources\API\ApplicationNoteResource;
+
+use App\User;
+use App\Job;
+use App\ApplicationNote;
 
 class ApplicationNotes extends Controller
 {
@@ -15,10 +18,10 @@ class ApplicationNotes extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user, Job $job)
     {
-        //get all application notes
-        return Application_Note::all();
+        //get all application notes associated with the job provided in the URL
+        return ApplicationNoteResource::collection($job->notes);
     }
 
     /**
@@ -27,17 +30,17 @@ class ApplicationNotes extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ApplicationNoteRequest $request)
+    public function store(User $user, Job $job, ApplicationNoteRequest $request)
     {
         // returns an array of all the data the user sent
         $data = $request->all();
 
         // creates an application note with the user data, store in DB and return it as JSON
         // NOTE: automatically gets 201 status as it's a POST request
-        $applicationnote = Application_Note::create($data);
+        $new_note = $job->notes()->create($data);
 
         //returns a new resource with selected fields
-        return new ApplicationNoteResource($applicationnote);
+        return new ApplicationNoteResource($new_note);
     }
 
     /**
@@ -46,10 +49,13 @@ class ApplicationNotes extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Application_Note $applicationnote)
+    public function show(User $user, Job $job, $noteId)
     {
+        // use note Id to get Application note from DB, type-hinting is not working for some reason
+        $note = ApplicationNote::findOrFail($noteId);
+
         //return the note requested in the URL
-        return new ApplicationNoteResource($applicationnote);
+        return new ApplicationNoteResource($note);
     }
 
     /**
@@ -59,7 +65,7 @@ class ApplicationNotes extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ApplicationNoteRequest $request, Application_Note $applicationnote)
+    public function update(ApplicationNoteRequest $request, User $user, Job $job, ApplicationNote $applicationnote)
     {
         //get the request data
         $data = $request->all();
@@ -77,7 +83,7 @@ class ApplicationNotes extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Application_Note $applicationnote)
+    public function destroy(User $user, Job $job, ApplicationNote $applicationnote)
     {
         //delete the note from the DB
         $applicationnote->delete();
