@@ -4,23 +4,29 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Interview extends Model
+class ApplicationNote extends Model
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'application_notes';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'interview_date',
-        'format',
-        'interviewer',
-        'notes'
+        'note_name',
+        'date',
+        'body',
     ];
 
     public function job()
     {
-        //an interview belongs to an job
+        // a note belongs to an job
         return $this->belongsTo(Job::class);
     }
 }

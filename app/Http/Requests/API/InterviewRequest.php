@@ -3,6 +3,7 @@
 namespace App\Http\Requests\API;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class InterviewRequest extends FormRequest
 {
@@ -26,7 +27,10 @@ class InterviewRequest extends FormRequest
         return [
                 //validation rules for interview creation
                 'interview_date' => ['required', 'date'],
-                'format' => ['required', 'string', 'max:50'],
+                'format' => [
+                    'required', 
+                    Rule::in([ 'online_testing','telephone', 'video_call', 'in_person',]), 
+                    'max:50'],
                 'interviewer' => ['nullable', 'string', 'max:250'],
                 'notes' => ['nullable', 'string','max:500'],
         ];

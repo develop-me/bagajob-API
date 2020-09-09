@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Job;
 use App\Http\Requests\API\JobRequest;
 use App\Http\Resources\API\JobResource;
+use App\Http\Resources\API\JobIndexResource;
 use App\User;
 
 class Jobs extends Controller
@@ -16,10 +16,10 @@ class Jobs extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(User $user)
     {
-        //get all the user's jobs
-        return Job::all();
+        // return all the user's jobs
+        return JobIndexResource::collection($user->jobs);
     }
 
     /**
@@ -28,17 +28,17 @@ class Jobs extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JobRequest $request)
+    public function store(User $user, JobRequest $request)
     {
         // returns an array of all the data the user sent
         $data = $request->all();
 
         // creates a Job with the user data, store in DB and return it as JSON
         // NOTE: automatically gets 201 status as it's a POST request
-        $job = Job::create($data);
+        $new_job = $user->jobs()->create($data);
 
         //returns a new resource with selected fields
-        return new JobResource($job);
+        return new JobResource($new_job);
     }
 
     /**
@@ -47,7 +47,7 @@ class Jobs extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Job $job)
+    public function show(User $user, Job $job)
     {
         //return the job requested in the URL
         return new JobResource($job);
@@ -60,7 +60,7 @@ class Jobs extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(JobRequest $request, Job $job)
+    public function update(JobRequest $request, User $user, Job $job)
     {
         //get the request data
         $data = $request->all();
@@ -78,7 +78,7 @@ class Jobs extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Job $job)
+    public function destroy(User $user, Job $job)
     {
         //delete the job from the DB
         $job->delete();

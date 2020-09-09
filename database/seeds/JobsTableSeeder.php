@@ -16,7 +16,9 @@ class JobsTableSeeder extends Seeder
         // create 10 users, for each user create and asssociate 10 jobs with that user
         factory(App\User::class, 10)->create()->each(function ($user)
         {
-            $user->jobs()->saveMany(factory(App\Job::class, 10)->make());
+            $user->jobs()
+                ->saveMany(
+                    factory(App\Job::class, 10)->make());
         });
     }
 }

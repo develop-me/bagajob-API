@@ -14,6 +14,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             JobsTableSeeder::class,
+            InterviewSeeder::class,
+            AppNoteSeeder::class,
         ]);
     }
 }

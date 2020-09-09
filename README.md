@@ -29,8 +29,11 @@ The Vagrant Box set up to use Laravel's Homestead image. To get started:
 1. Navigate to new `code` folder: `cd code`
 1. Run the database migrations: `artisan migrate`
 1. Seed the database with example data: `artisan db:seed`
-    - `UsersTableSeeder.php` will add the admin user 
+    - `UsersTableSeeder.php` adds the admin user 
     - `JobsTableSeeder.php` adds 10 Users, each with 10 jobs associated.
+    - `AppNoteSeeder.php` adds 2 application notes to each job
+    - `InterviewSeeder.php` adds 2 interviews to each job
+
 1. Create the Passport authentication keys: `php artisan passport:install`
 
 
@@ -97,11 +100,44 @@ Next, initialise the plugin:
 
 All requests should:
 
-- Use the basename `https://homestead.test/api/`
+- Use the basename `https://homestead.test/`
 - Be sent using JSON and with the `Accept: application/json` header.
 
 ## End points:
-### Register User - POST `/api/register`
+Registration and Login
+- `POST /register`
+- `POST /login`
+- `POST /reset-password-without-token`
+- `POST /reset-password-with-token`
+
+Users
+- `PATCH /user/:userId`
+- `DELETE /user/:userId`
+
+Jobs
+- `GET /user/:userId/jobs`
+- `POST /user/:userId/jobs`
+- `GET /user/:userId/jobs/:jobId`
+- `PATCH /user/:userId/jobs/:jobId`
+- `DELETE /user/:userId/jobs/:jobId`
+
+Interviews
+- `GET /user/:userId/jobs/:jobId/interviews`
+- `POST /user/:userId/jobs/:jobId/interviews`
+- `GET /user/:userId/jobs/:jobId/interviews/:interviewId`
+- `PATCH /user/:userId/jobs/:jobId/interviews/:interviewId`
+- `DELETE /user/:userId/jobs/:jobId/interviews/:interviewId`
+
+Application Notes
+- `GET /user/:userId/jobs/:jobId/app-notes`
+- `POST /user/:userId/jobs/:jobId/app-notes`
+- `GET /user/:userId/jobs/:jobId/app-notes/:appNoteId`
+- `PATCH /user/:userId/jobs/:jobId/app-notes/:appNoteId`
+- `DELETE /user/:userId/jobs/:jobId/app-notes/:appNoteId`
+
+
+
+### Register User - POST `/register`
 
 #### Request
 ```json
@@ -155,7 +191,7 @@ All requests should:
 }
 ```
 
-### Login User - POST `/api/login`
+### Login User - POST `/login`
 
 #### Request
 - ***NOTE: `username` maps to `email` in this case***
@@ -216,7 +252,7 @@ All requests should:
 
 ### Forgot Password / Password Reset Routes
 
-### `POST /api/reset-password-without-token`
+### `POST /reset-password-without-token`
 
 #### Request
 ```json
@@ -265,7 +301,7 @@ All requests should:
 
 
 ```
-### `POST /api/reset-password-with-token`
+### `POST /reset-password-with-token`
 
 #### Request
 ```json
@@ -301,7 +337,7 @@ All requests should:
 }
 ```
 
-### Update User Account - PATCH `/api/user/{user id}`
+### Update User Account - PATCH `/user/{user id}`
 
 #### Request
 ```json
@@ -359,7 +395,7 @@ All requests should:
 }
 ```
 
-### DELETE User Account - DELETE `/api/user/{user id}`
+### DELETE User Account - DELETE `/user/{user id}`
 
 #### Responses
 
@@ -382,76 +418,38 @@ All requests should:
 
 
 
-### Jobs - `/api/jobs`
+### Jobs
 
-#### `GET /api/jobs`
+#### `GET /user/:userId/jobs`
 
-Returns all jobs as JSON object:
-
-```json
-{
-        "id": 2,
-        "job_title": "Compacting Machine Operator",
-        "company": "McLaughlin, Johnston and Koepp",
-        "active": 1,
-        "location": "East Kaceybury",
-        "salary": "20444.00",
-        "closing_date": "2020-09-05 10:02:52",
-        "application_date": null,
-        "description": "Sunt ratione velit cumque ipsam nihil soluta. Ut asperiores ab excepturi laboriosam porro. Error voluptatibus beatae non. Et sunt omnis sed velit. Quia qui corrupti autem facilis.",
-        "recruiter_name": null,
-        "recruiter_email": null,
-        "recruiter_phone": null,
-        "stage": "1",
-        "created_at": "2020-08-27T13:17:46.000000Z",
-        "updated_at": "2020-08-27T13:17:46.000000Z"
-    },
-    {
-        "id": 3,
-        "job_title": "Power Distributors OR Dispatcher",
-        "company": "Kuphal-Wunsch",
-        "active": 1,
-        "location": "Larissachester",
-        "salary": "59962.00",
-        "closing_date": "2020-12-08 13:56:00",
-        "application_date": null,
-        "description": "Numquam dolor voluptas quia et temporibus aut facilis. Quam assumenda in cum ducimus enim. Sit sapiente et magni et blanditiis. Accusantium est porro voluptatibus velit nostrum. Laborum quas optio quod pariatur.",
-        "recruiter_name": null,
-        "recruiter_email": null,
-        "recruiter_phone": null,
-        "stage": "1",
-        "created_at": "2020-08-27T13:17:46.000000Z",
-        "updated_at": "2020-08-27T13:17:46.000000Z"
-    },
-```
-
-**Does not return interviews, notes or users associated with those jobs.**
-
-#### `GET /jobs/:id`
-
-Returns an individual job as JSON object where `:id` is a job ID
+Returns a subset of information from all of the specified user's jobs as JSON:
 
 ```json
 {
-        "id": 17,
-        "job_title": "Electrotyper",
-        "company": "Satterfield-Dach",
-        "active": 1,
-        "location": "Archland",
-        "salary": "30601.00",
-        "closing_date": "2021-01-20 07:00:04",
-        "application_date": null,
-        "description": "Nihil illum quam id et natus deserunt. Et eius porro ex. Deleniti nulla libero doloribus et laudantium eius. Quos voluptatem maxime soluta. Repellendus voluptatem neque est facere facere atque.",
-        "recruiter_name": null,
-        "recruiter_email": null,
-        "recruiter_phone": null,
-        "stage": "1",
-        "created_at": "2020-08-27T13:17:46.000000Z",
-        "updated_at": "2020-08-27T13:17:46.000000Z"
-    },
+    "data": [
+        {
+            "id": 21,
+            "job_title": "Architect",
+            "company": "Halvorson, Runolfsson and Gutmann",
+            "status": null,
+            "stage": "1"
+        },
+        {
+            "id": 22,
+            "job_title": "Tire Builder",
+            "company": "Spinka-Lubowitz",
+            "status": null,
+            "stage": "1"
+        },
+    ]
+}
 ```
 
-#### `POST /api/jobs`
+**Does not return interviews or notes**
+
+#### `POST /user/:userId/jobs`
+
+##### Request
 
 Adds a job to the database. The below is the minimum required JSON, all other fields optional.
 ```json
@@ -462,6 +460,182 @@ Adds a job to the database. The below is the minimum required JSON, all other fi
     "active": 1
 }
 ```
+
+##### Response
+The newly created job with an Id (see GET request below) 
+
+#### `GET /user/:userId/jobs/:jobId`
+
+Returns an individual job as JSON object where `:jobId` is the job ID
+
+```json
+{
+    "data": {
+        "id": 21,
+        "job_title": "Architect",
+        "company": "Halvorson, Runolfsson and Gutmann",
+        "status": null,
+        "location": "South Adamfort",
+        "salary": "31816.00",
+        "closing_date": "2021-05-10 13:06:29",
+        "application_date": null,
+        "description": "Voluptatum sapiente est voluptatibus sed. Incidunt maiores iste quae labore. Delectus eius necessitatibus et itaque nihil dolor.",
+        "recruiter_name": null,
+        "recruiter_email": null,
+        "recruiter_phone": null,
+        "stage": "1"
+    }
+}
+```
+
+#### `PATCH /user/:userId/jobs/:jobId`
+
+##### Request
+JSON with fields to update
+
+##### Response
+The updated job 
+
+#### `DELETE /user/:userId/jobs/:jobId`
+
+##### Response
+`204 No Content`
+
+### Interviews
+#### `GET /user/:userId/jobs/:jobId/interviews`
+
+Returns all of the specified job's interviews as JSON:
+
+```json
+{
+    "data": [
+        {
+            "id": 41,
+            "job_id": 21,
+            "interview_date": "2019-12-04 00:00:00",
+            "format": "video_call",
+            "interviewer": "Prof. Ozella Stark II",
+            "notes": "Quis aut commodi nam id consectetur. Et veniam magnam et incidunt est officiis magnam consequatur."
+        },
+        {
+            "id": 42,
+            "job_id": 21,
+            "interview_date": "2008-07-14 00:00:00",
+            "format": "online_testing",
+            "interviewer": "Leonardo Bayer DVM",
+            "notes": "Voluptatem numquam ea a quaerat sunt. Laudantium aperiam aut pariatur perferendis nisi possimus."
+        }
+    ]
+}
+```
+
+#### `POST /user/:userId/jobs/:jobId/interviews`
+
+##### Request
+```json
+{
+    "interview_date": "2020-09-09", // REQ, date
+    "format": "telephone", // REQ, set - 'online_testing','telephone', 'video_call', 'in_person'
+    "interviewer": "Johnny", // OPT, string, max 250
+    "notes": "Twas the night before xmas and all through the house" // OPT, string, max 500
+}
+```
+#### Response
+The newly created interview as JSON
+
+#### `GET /user/:userId/jobs/:jobId/interviews/:interviewId`
+Return 1 interview with the specified `:interviewId`
+```json
+{
+    "data": {
+        "id": 42,
+        "job_id": 21,
+        "interview_date": "2008-07-14 00:00:00",
+        "format": "online_testing",
+        "interviewer": "Leonardo Bayer DVM",
+        "notes": "Voluptatem numquam ea a quaerat sunt. Laudantium aperiam aut pariatur perferendis nisi possimus."
+    }
+}
+```
+
+#### `PATCH /user/:userId/jobs/:jobId/interviews/:interviewId`
+
+##### Request
+JSON with fields to update
+
+##### Response
+The updated interview 
+
+#### `DELETE /user/:userId/jobs/:jobId/interviews/:interviewId`
+
+##### Response
+`204 No Content`
+
+### Application Notes
+#### `GET /user/:userId/jobs/:jobId/app-notes`
+Returns all of the specified job's application notes as JSON:
+
+```json
+{
+    "data": [
+        {
+            "id": 41,
+            "job_id": 21,
+            "note_name": "distinctio",
+            "date": "1998-06-17",
+            "body": "Illo tempora sequi ea quos. Et ut praesentium aut. Perspiciatis voluptas natus nisi similique. Architecto animi unde eum doloribus voluptatum in."
+        },
+        {
+            "id": 42,
+            "job_id": 21,
+            "note_name": "deleniti",
+            "date": "2008-02-01",
+            "body": "Est totam magnam ratione non ut ut qui. Sequi quia exercitationem ratione iure ullam et in et. Consequatur qui qui enim."
+        }
+    ]
+}
+```
+
+#### `POST /user/:userId/jobs/:jobId/app-notes`
+
+##### Request format
+```json
+{
+    "date": "2020-10-10", // REQ, date
+    "note_name": "NOTE", // REQ, string, max 50
+    "body": "xmas and all through the house" // REQ, string, max 500
+}
+```
+
+#### Response
+The newly created application notes as JSON
+
+#### `GET /user/:userId/jobs/:jobId/app-notes/:appNoteId`
+Return 1 applicaiton note with the specified `:appNoteId`
+```json
+{
+    "data": {
+        "id": 42,
+        "job_id": 21,
+        "note_name": "deleniti",
+        "date": "2008-02-01",
+        "body": "Est totam magnam ratione non ut ut qui. Sequi quia exercitationem ratione iure ullam et in et. Consequatur qui qui enim."
+    }
+}
+```
+
+#### `PATCH /user/:userId/jobs/:jobId/app-notes/:appNoteId`
+##### Request
+JSON with fields to update
+
+##### Response
+The updated interview 
+
+#### `DELETE /user/:userId/jobs/:jobId/app-notes/:appNoteId`
+
+##### Response
+`204 No Content`
+
 ---
 
 ## Laravel
