@@ -7,7 +7,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Job::class, function (Faker $faker) {
     return [
-        'job_title' => $faker->jobTitle($maxNbChars = 50),
+        'job_title' => substr($faker->jobTitle(), 0, 50),
         'company' => $faker->company(),
         'stage' => 1,
         'description' => $faker->sentences($nb = 3, $asText = true),

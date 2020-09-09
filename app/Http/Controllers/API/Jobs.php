@@ -47,7 +47,7 @@ class Jobs extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Job $job)
+    public function show(User $user, Job $job)
     {
         //return the job requested in the URL
         return new JobResource($job);
