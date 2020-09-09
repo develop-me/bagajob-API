@@ -18,7 +18,7 @@ class Jobs extends Controller
      */
     public function index(User $user)
     {
-        //get all the user's jobs
+        // return all the user's jobs
         return JobIndexResource::collection($user->jobs);
     }
 
@@ -28,17 +28,17 @@ class Jobs extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JobRequest $request)
+    public function store(User $user, JobRequest $request)
     {
         // returns an array of all the data the user sent
         $data = $request->all();
 
         // creates a Job with the user data, store in DB and return it as JSON
         // NOTE: automatically gets 201 status as it's a POST request
-        $job = Job::create($data);
+        $new_job = $user->jobs()->create($data);
 
         //returns a new resource with selected fields
-        return new JobResource($job);
+        return new JobResource($new_job);
     }
 
     /**
