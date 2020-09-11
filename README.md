@@ -1,4 +1,9 @@
 # BagaJob - The Definitive Job Hunting Management App
+
+## Code of Conduct
+
+Available here: https://github.com/develop-me/bagajob/wiki/A-Code-of-Conduct-for-Open-Source-Projects
+
 ## Back-end Architecture - Laravel Blade
 
 ### Collaborating:
