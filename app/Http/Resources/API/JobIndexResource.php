@@ -16,9 +16,9 @@ class JobIndexResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'job_title' => $this->job_title,
+            'title' => $this->title,
             'company' => $this->company,
-            'status' => $this->status,
+            'active' => $this->active,
             'stage' => $this->stage,
         ];
     }

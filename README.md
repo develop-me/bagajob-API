@@ -429,16 +429,16 @@ Returns a subset of information from all of the specified user's jobs as JSON:
     "data": [
         {
             "id": 21,
-            "job_title": "Architect",
+            "title": "Architect",
             "company": "Halvorson, Runolfsson and Gutmann",
-            "status": null,
+            "active": 1,
             "stage": "1"
         },
         {
             "id": 22,
-            "job_title": "Tire Builder",
+            "title": "Tire Builder",
             "company": "Spinka-Lubowitz",
-            "status": null,
+            "active": 1,
             "stage": "1"
         },
     ]
@@ -454,7 +454,7 @@ Returns a subset of information from all of the specified user's jobs as JSON:
 Adds a job to the database. The below is the minimum required JSON, all other fields optional.
 ```json
 {
-    "job_title" : "Senior Java Developer",
+    "title" : "Senior Java Developer",
     "company" : "Green Software Inc.",
     "stage" : 1,
     "active": 1
@@ -472,18 +472,17 @@ Returns an individual job as JSON object where `:jobId` is the job ID
 {
     "data": {
         "id": 21,
-        "job_title": "Architect",
-        "company": "Halvorson, Runolfsson and Gutmann",
-        "status": null,
-        "location": "South Adamfort",
-        "salary": "31816.00",
-        "closing_date": "2021-05-10 13:06:29",
-        "application_date": null,
-        "description": "Voluptatum sapiente est voluptatibus sed. Incidunt maiores iste quae labore. Delectus eius necessitatibus et itaque nihil dolor.",
-        "recruiter_name": null,
-        "recruiter_email": null,
-        "recruiter_phone": null,
-        "stage": "1"
+        "title": "Rental Clerk",
+        "company": "Sauer, Witting and Osinski",
+        "active": 1, // boolean (1 - true, 0 - false)
+        "location": "Bergemouth",
+        "salary": "56010.00",
+        "closing_date": "2021-05-22 22:05:29",
+        "date_applied": null,
+        "description": "Dicta dolorem aut id porro ut porro sit. Expedita nemo vel natus eos ipsa quasi. Deleniti placeat non qui quibusdam adipisci amet et at.",
+        "stage": "1",
+        "interviews": ["..."],
+        "application_notes": ["..."]
     }
 }
 ```

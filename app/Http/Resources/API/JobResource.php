@@ -16,17 +16,14 @@ class JobResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'job_title' => $this->job_title,
+            'title' => $this->title,
             'company' => $this->company,
-            'status' => $this->status,
+            'active' => $this->active,
             'location' => $this->location,
             'salary' => $this->salary,
             'closing_date' => $this->closing_date,
-            'application_date' => $this->application_date,
+            'date_applied' => $this->date_applied,
             'description' => $this->description,
-            'recruiter_name' => $this->recruiter_name,
-            'recruiter_email' => $this->recuiter_email,
-            'recruiter_phone' => $this->recruiter_phone,
             'stage' => $this->stage,
             'interviews' => $this->interviews,
             'application_notes' => $this->notes
