@@ -19,9 +19,8 @@ class ApplicationNote extends Model
      * @var array
      */
     protected $fillable = [
-        'note_name',
         'date',
-        'body',
+        'data',
     ];
 
     public function job()

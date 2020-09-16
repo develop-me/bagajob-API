@@ -25,7 +25,6 @@ class ApplicationNoteRequest extends FormRequest
     {
         return [
             //validation rules for note creation
-            'note_name' => ['required', 'string', 'max:50'],
             'date' => ['required', 'date'],
             'data' => ['nullable', 'string','max:500'],
         ];

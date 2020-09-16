@@ -8,7 +8,6 @@ use Faker\Generator as Faker;
 $factory->define(ApplicationNote::class, function (Faker $faker) {
     return [
         'date' => $faker->date(),
-        'note_name' => $faker->word(),
-        'body' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true)
+        'data' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true)
     ];
 });

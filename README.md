@@ -580,16 +580,14 @@ Returns all of the specified job's application notes as JSON:
         {
             "id": 41,
             "job_id": 21,
-            "note_name": "distinctio",
             "date": "1998-06-17",
-            "body": "Illo tempora sequi ea quos. Et ut praesentium aut. Perspiciatis voluptas natus nisi similique. Architecto animi unde eum doloribus voluptatum in."
+            "data": "Illo tempora sequi ea quos. Et ut praesentium aut. Perspiciatis voluptas natus nisi similique. Architecto animi unde eum doloribus voluptatum in."
         },
         {
             "id": 42,
             "job_id": 21,
-            "note_name": "deleniti",
             "date": "2008-02-01",
-            "body": "Est totam magnam ratione non ut ut qui. Sequi quia exercitationem ratione iure ullam et in et. Consequatur qui qui enim."
+            "data": "Est totam magnam ratione non ut ut qui. Sequi quia exercitationem ratione iure ullam et in et. Consequatur qui qui enim."
         }
     ]
 }
@@ -601,8 +599,7 @@ Returns all of the specified job's application notes as JSON:
 ```json
 {
     "date": "2020-10-10", // REQ, date
-    "note_name": "NOTE", // REQ, string, max 50
-    "body": "xmas and all through the house" // REQ, string, max 500
+    "data": "xmas and all through the house" // REQ, string, max 500
 }
 ```
 
@@ -616,9 +613,8 @@ Return 1 applicaiton note with the specified `:appNoteId`
     "data": {
         "id": 42,
         "job_id": 21,
-        "note_name": "deleniti",
         "date": "2008-02-01",
-        "body": "Est totam magnam ratione non ut ut qui. Sequi quia exercitationem ratione iure ullam et in et. Consequatur qui qui enim."
+        "data": "Est totam magnam ratione non ut ut qui. Sequi quia exercitationem ratione iure ullam et in et. Consequatur qui qui enim."
     }
 }
 ```
