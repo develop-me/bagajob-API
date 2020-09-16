@@ -17,9 +17,8 @@ class ApplicationNoteResource extends JsonResource
         return [
             'id' => $this->id,
             'job_id' => $this->job_id,
-            'note_name' => $this->note_name,
             'date' => $this->date,
-            'body' => $this->body,
+            'data' => $this->body,
         ];
     }
 }

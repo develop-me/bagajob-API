@@ -26,7 +26,7 @@ class InterviewRequest extends FormRequest
     {
         return [
                 //validation rules for interview creation
-                'interview_date' => ['required', 'date'],
+                'date' => ['required', 'date'],
                 'format' => [
                     'required', 
                     Rule::in([ 'online_testing','telephone', 'video_call', 'in_person',]), 

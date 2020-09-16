@@ -12,7 +12,7 @@ class Interview extends Model
      * @var array
      */
     protected $fillable = [
-        'interview_date',
+        'date',
         'format',
         'interviewer',
         'notes'
