@@ -28,6 +28,8 @@ class JobResource extends JsonResource
             'recruiter_email' => $this->recuiter_email,
             'recruiter_phone' => $this->recruiter_phone,
             'stage' => $this->stage,
+            'interviews' => $this->interviews,
+            'application_notes' => $this->notes
         ];
     }
 }
