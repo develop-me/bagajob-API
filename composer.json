@@ -15,7 +15,7 @@
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
         "laravel/homestead": "^10.10",
-        "laravel/passport": "^9.3",
+        "laravel/passport": "^10.0",
         "laravel/tinker": "^2.0",
         "mailjet/mailjet-apiv3-php": "^1.4",
         "nesbot/carbon": "^2.38",
