@@ -12,16 +12,13 @@ class Job extends Model
      * @var array
      */
     protected $fillable = [
-        'job_title',
+        'title',
         'active',
         'location',
         'salary',
-        'closing date',
-        'date applied',
+        'closing_date',
+        'date_applied',
         'description',
-        'recruiter name',
-        'recruiter email',
-        'recruiter phone',
         'stage',
         'company'
     ];

@@ -1,78 +1,54 @@
 {
-  "jobs": [
-    {
-      "job id": "1",
-      "status": "active",
-      "company": "Awesome Software Inc",
-      "salary": "25000",
-      "location": "Berlin",
-      "closing date": "08/09/2020",
-      "date applied": "05/09/2020 16:54",
-      "title": "Software Guru",
-      "description": "We are looking for a dynamic blah blah",
-      "recruiter name": "Jimmy",
-      "recruiter email": "jimmy@jimmy.com",
-      "recruiter phone": "0729421847",
+  "data": {
+      "id": 26,
+      "title": "Ambulance Driver",
+      "company": "Lubowitz, Abshire and Aufderhar",
+      "active": 1,
+      "location": "Dickiburgh",
+      "salary": "43735.00",
+      "closing_date": "2021-01-18 06:20:39",
+      "date_applied": "2001-08-25 19:28:42",
+      "description": "Est blanditiis qui omnis nemo. Aut autem dolor et odio earum sint fugit. Eaque sit qui praesentium ab odit tenetur iusto.",
       "stage": "1",
-      "interview": [
-        {
-          "date": "05/09/2020 16:00",
-          "format": "video",
-          "interviewer": "Elon Musk",
-          "notes": "Elon Musk is scary and the interview didn't go well"
-        }
+      "interviews": [
+          {
+              "id": 51,
+              "date": "1978-03-22 00:00:00",
+              "format": "in_person",
+              "interviewer": "Kaitlin Becker",
+              "notes": "Vero minus sit voluptas non quos voluptatum. Aut explicabo quam id voluptatem dolorem unde molestiae. Ratione molestias eveniet consequuntur esse alias animi. Repellendus ut dolore nihil ut.",
+              "created_at": "2020-09-16T16:55:51.000000Z",
+              "updated_at": "2020-09-16T16:55:51.000000Z",
+              "job_id": 26
+          },
+          {
+              "id": 52,
+              "date": "1976-10-03 00:00:00",
+              "format": "telephone",
+              "interviewer": "Magdalena Nitzsche",
+              "notes": "Quo quasi ea non qui sunt. Distinctio odio recusandae repellat et. Impedit animi quam consequatur aut. Consectetur veniam et facilis perferendis molestiae consequatur est.",
+              "created_at": "2020-09-16T16:55:51.000000Z",
+              "updated_at": "2020-09-16T16:55:51.000000Z",
+              "job_id": 26
+          }
       ],
-      "Application Notes": [
-        {
-          "note id": "5",
-          "note category": "text",
-          "note date": "06/04/2020",
-          "note data": "I spoke to Ben today and then I had a ham sandwich"
-        },
-        {
-          "note id": "17",
-          "note category": "text",
-          "note date": "06/04/2020",
-          "note data": "Interview 06/09/2020 - total flop"
-        }
+      "application_notes": [
+          {
+              "id": 51,
+              "date": "1988-11-28",
+              "data": "Quisquam ipsam quo est reiciendis ea consequuntur. Quidem quaerat cumque dolor. Qui autem deserunt et assumenda voluptatem dolor labore.",
+              "created_at": "2020-09-16T16:55:52.000000Z",
+              "updated_at": "2020-09-16T16:55:52.000000Z",
+              "job_id": 26
+          },
+          {
+              "id": 52,
+              "date": "1990-10-04",
+              "data": "Reiciendis ullam libero itaque ea suscipit architecto alias. Dolorum ab aliquam qui et. Nihil rerum eveniet rerum voluptate eos et. Veniam modi provident beatae aut.",
+              "created_at": "2020-09-16T16:55:52.000000Z",
+              "updated_at": "2020-09-16T16:55:52.000000Z",
+              "job_id": 26
+          }
       ]
-    },
-    {
-      "job id": "2",
-      "status": "archived",
-      "company": "Melon Husk Software Inc",
-      "salary": "25000",
-      "location": "Atlanta, GA",
-      "closing date": "08/09/2020",
-      "date applied": "05/09/2020 16:54",
-      "title": "Software Guru",
-      "description": "We are looking for a dynamic blah blah",
-      "recruiter name": "Jimmy",
-      "recruiter email": "jimmy@jimmy.com",
-      "recruiter phone": "0729421847",
-      "stage": "2",
-      "interview": [
-        {
-          "date": "05/09/2020 16:00",
-          "format": "video",
-          "interviewer": "Elon Musk",
-          "notes": "Elon Musk is scary and the interview didn't go well"
-        }
-      ],
-      "Application Notes": [
-        {
-          "note id": "5",
-          "note category": "text",
-          "note date": "06/04/2020",
-          "note data": "I spoke to Ben today and then I had a ham sandwich"
-        },
-        {
-          "note id": "17",
-          "note category": "text",
-          "note date": "06/04/2020",
-          "note data": "Interview 06/09/2020 - total flop"
-        }
-      ]
-    }
-  ]
+  }
 }
