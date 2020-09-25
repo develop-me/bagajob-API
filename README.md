@@ -44,6 +44,9 @@ Visit `http://homestead.test` on Mac or `http://localhost:8000` on Windows:
 
 ### Troubleshooting:
 
+### Q: After running a database refresh/seed authentication is broken?
+A: Run `artisan passport:install` to create the personal access client keys again
+
 ### Q: When I run `composer install` I get a memory error
 A: 
 
@@ -481,6 +484,8 @@ Returns an individual job as JSON object where `:jobId` is the job ID
         "date_applied": null,
         "description": "Dicta dolorem aut id porro ut porro sit. Expedita nemo vel natus eos ipsa quasi. Deleniti placeat non qui quibusdam adipisci amet et at.",
         "stage": "1",
+        "cv": "CV_June_2020.pdf", // string of the filename, not actually storing files at this time
+        "cover_letter": "fullstack_cover_July_2020.pdf", // string of the filename, not actually storing files at this time
         "interviews": ["..."],
         "application_notes": ["..."]
     }
