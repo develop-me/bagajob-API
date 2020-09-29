@@ -17,7 +17,7 @@ class InterviewResource extends JsonResource
         return [
             'id' => $this->id,
             'job_id' => $this->job_id,
-            'date' => $this->date,
+            'interview_date' => $this->interview_date,
             'format' => $this->format,
             'interviewer' => $this->interviewer,
             'notes' => $this->notes,
