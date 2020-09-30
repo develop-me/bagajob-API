@@ -5,7 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 
 // Models
-use App\User;
+use App\Models\User;
 
 // Helpers
 use Illuminate\Support\Facades\Hash;

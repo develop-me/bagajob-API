@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-use App\User;
+use App\Models\User;
 
 // Resources (Response formatting)
 use App\Http\Resources\API\UserResource;

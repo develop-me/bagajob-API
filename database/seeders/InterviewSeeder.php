@@ -1,8 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use App\Job;
-use App\Interview;
+use App\Models\Job;
+use App\Models\Interview;
 
 class InterviewSeeder extends Seeder
 {
@@ -15,7 +17,7 @@ class InterviewSeeder extends Seeder
     {
         // loop over jobs and add 2 interviews
         Job::all()->each(function ($job) {
-            $job->interviews()->saveMany(factory(Interview::class,2)->make());
+            $job->interviews()->saveMany(Interview::factory()->count(2)->make());
         });
     }
 }

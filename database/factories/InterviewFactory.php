@@ -1,15 +1,31 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Interview;
-use Faker\Generator as Faker;
+use App\Models\Interview;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Interview::class, function (Faker $faker) {
-    return [
-        'interview_date' => $faker->date(),
-        'format' => $faker->randomElement($array = array ('online_testing','telephone', 'video_call', 'in_person',)),
-        'interviewer' => $faker->name(),
-        'notes' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true)
-    ];
-});
+class InterviewFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Interview::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'interview_date' => $this->faker->date(),
+            'format' => $this->faker->randomElement($array = array ('online_testing','telephone', 'video_call', 'in_person',)),
+            'interviewer' => $this->faker->name(),
+            'notes' => $this->faker->paragraph($nbSentences = 3, $variableNbSentences = true)
+        ];
+    }
+}

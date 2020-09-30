@@ -1,8 +1,10 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use App\ApplicationNote;
-use App\Job;
+use App\Models\ApplicationNote;
+use App\Models\Job;
 
 class AppNoteSeeder extends Seeder
 {
@@ -15,7 +17,7 @@ class AppNoteSeeder extends Seeder
     {
         // loop over all jobs and add 2 notes
         Job::all()->each(function ($job) {
-            $job->notes()->saveMany(factory(ApplicationNote::class,2)->make());
+            $job->notes()->saveMany(ApplicationNote::factory()->count(10)->make());
         });
     }
 }

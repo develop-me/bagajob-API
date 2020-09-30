@@ -9,7 +9,7 @@ use App\Http\Controllers\API\Interviews;
 use Laravel\Passport\Http\Controllers\AccessTokenController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\UserController;
-use App\Interview;
+use App\Models\Interview;
 
 /*
 |--------------------------------------------------------------------------
