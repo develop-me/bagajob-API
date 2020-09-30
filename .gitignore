@@ -44,3 +44,6 @@ yarn-error.log
 # Vagrant files
 /vagrant
 /.vagrant
+
+# capistrano
+/log/

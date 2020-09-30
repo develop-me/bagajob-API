@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\API\ApplicationNoteRequest;
 use App\Http\Resources\API\ApplicationNoteResource;
 
-use App\User;
-use App\Job;
-use App\ApplicationNote;
+use App\Models\User;
+use App\Models\Job;
+use App\Models\ApplicationNote;
 
 class ApplicationNotes extends Controller
 {

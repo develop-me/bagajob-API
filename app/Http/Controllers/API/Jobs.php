@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Job;
+use App\Models\Job;
 use App\Http\Requests\API\JobRequest;
 use App\Http\Resources\API\JobResource;
 use App\Http\Resources\API\JobIndexResource;
-use App\User;
+use App\Models\User;
 
 class Jobs extends Controller
 {

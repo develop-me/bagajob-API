@@ -14,7 +14,7 @@ use App\Http\Requests\API\UserAccountRequest;
 use App\Http\Resources\API\UserResource;
 
 // Models
-use App\User;
+use App\Models\User;
 
 class UserController extends Controller
 {

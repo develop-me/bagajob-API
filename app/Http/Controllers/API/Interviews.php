@@ -4,11 +4,11 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Interview;
+use App\Models\Interview;
 use App\Http\Requests\API\InterviewRequest;
 use App\Http\Resources\API\InterviewResource;
-use App\Job;
-use App\User;
+use App\Models\Job;
+use App\Models\User;
 
 class Interviews extends Controller
 {

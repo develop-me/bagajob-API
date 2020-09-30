@@ -1,13 +1,29 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\ApplicationNote;
-use Faker\Generator as Faker;
+use App\Models\ApplicationNote;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(ApplicationNote::class, function (Faker $faker) {
-    return [
-        'date' => $faker->date(),
-        'data' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true)
-    ];
-});
+class ApplicationNoteFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = ApplicationNote::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'date' => $this->faker->date(),
+            'data' => $this->faker->paragraph($nbSentences = 3, $variableNbSentences = true)
+        ];
+    }
+}
