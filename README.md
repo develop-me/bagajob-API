@@ -102,14 +102,58 @@ Next, initialise the plugin:
 
 ---
 
+# Deployment
+
+## Hosting
+- The bagajob API lives on AWS, using the bagajob.mail@gmail.com account as the login user.
+- Server: EC2 t2.micro
+- Region: eu-west-2 (london)
+- OS: Ubuntu 20.04
+- AMI: ami-05c424d59413a2876 (UbuntuServer 20.04LTS(HVM), SSDVolumeType)
+- Software:
+  - Nginx: HTTP server software
+  - MySQL: database management system 
+  - PHP: programming language
+  - Git: file management
+  - Composer: PHP package manager
+  - SSH Keys: for authentication
+
+### SSH Access
+- To access the EC2 instance follow section `24.2 SSH` from the DevelopMe Deployment Chapter Notes
+- You will need a private key .pem from XXXX
+
+## Code Deployment (Capistrano)
+### Updating
+- Updating the code on the EC2 instance is a breeze with capistrano
+1. Install bundle
+  - On your machine run `gem install bundler`
+  - Make sure you have an up to date copy of the repo that contains `Gemfile`, cd to the project directory and run `bundle install`
+1. Make sure your recent changes are tested and synced with the `master` branch (usually through merging a pull request)
+1. Run `bundle exec cap production deploy`
+- This will make capistrano do the following:
+    1. Pull down the latest version of the repo to the server
+    2. Copy the files into a new timestamped releases directory
+    3. Link any shared files (.env, the storage directory)
+    4. Run composer install
+    5. Link the current directory to the latest
+
+For more information check out `Chapter 25 - Capistrano` in the DevelopMe Notes
+
+### Rolling Back
+If you deploy a site and then realise the code wasn’t quite ready, you can go back to
+the previous version by running:
+
+`bundle exec cap production deploy:rollback`
+
 # Bagajob API
 
 ## General
 
 All requests should:
 
-- Use the basename `https://homestead.test/`
-- Be sent using JSON and with the `Accept: application/json` header.
+- For non-production use the basename `https://homestead.test/api/`
+- For production use the basename `https://bagajob-api.developme.space/api/`
+- Be sent with the `Accept: application/json` header.
 
 ## End points:
 Registration and Login
