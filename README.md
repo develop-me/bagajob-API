@@ -118,9 +118,20 @@ Next, initialise the plugin:
   - Composer: PHP package manager
   - SSH Keys: for authentication
 
-### SSH Access
-- To access the EC2 instance follow section `24.2 SSH` from the DevelopMe Deployment Chapter Notes
-- You will need a private key .pem from XXXX
+### SSH Access (for deployment)
+- To access the EC2 instance you'll need an ssh keypair, which you likely already have from the DevelopMe course. Run `tail ~/.ssh/id_rsa.pub` at the command prompt on your machine and provide the output to Kieran/Nik.
+- Someone with access to the EC2 instance will then add this to `~/.ssh/authorized_keys` on the server to grant you ssh access. 
+
+- Add the below entry to your ssh configuration file, replace `<alias>` with anything you want and `<your-server-key>` with the name of the .pem file you have at `~/.ssh/`
+
+`code ~/.ssh/config`
+```
+Host <alias> ec2-3-8-127-159.eu-west-2.compute.amazonaws.com
+  HostName ec2-3-8-127-159.eu-west-2.compute.amazonaws.com 
+  User ubuntu
+  IdentityFile ~/.ssh/<your-server-key>.pem
+  IdentitiesOnly yes
+```
 
 ## Code Deployment (Capistrano)
 ### Updating
