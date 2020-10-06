@@ -45,15 +45,6 @@ namespace :deploy do
         end
     end
 
-    # composer task
-    # runs composer install
-    task :composer do
-        on roles(:app) do
-            info "Install Composer packages"
-            execute "composer install"
-        end
-    end
-
     # migrate_db task
     # migrates the database
     task :migrate_db do
@@ -79,8 +70,8 @@ namespace :deploy do
     ###
 
     # run these tasks once the code has been published
-    after :published, "optimize"
-    after :published, "composer"
+    after :published, "composer:install"
     after :published, "migrate_db"
+    after :published, "optimize"
     after :published, "php_reload"
 end
