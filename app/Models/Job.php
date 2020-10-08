@@ -22,7 +22,9 @@ class Job extends Model
         'date_applied',
         'description',
         'stage',
-        'company'
+        'company',
+        'cv',
+        'cover_letter'
     ];
 
     // User Relationship

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Http\Requests\API\JobRequest;
+use App\Http\Requests\JobUpdateRequest;
 use App\Http\Resources\API\JobResource;
 use App\Http\Resources\API\JobIndexResource;
 use App\Models\User;
@@ -60,11 +61,11 @@ class Jobs extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(JobRequest $request, User $user, Job $job)
+    public function update(JobUpdateRequest $request, User $user, Job $job)
     {
         //get the request data
         $data = $request->all();
-
+    
         //update the job entry and save to DB
         $job->fill($data)->save();
 
