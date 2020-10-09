@@ -26,7 +26,9 @@ class JobResource extends JsonResource
             'description' => $this->description,
             'stage' => $this->stage,
             'interviews' => $this->interviews,
-            'application_notes' => $this->notes
+            'application_notes' => $this->notes,
+            'cv' => $this->cv,
+            'cover_letter' => $this->cover_letter
         ];
     }
 }
