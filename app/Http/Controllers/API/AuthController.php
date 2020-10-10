@@ -76,8 +76,8 @@ class AuthController extends Controller
         ->where('email', $userEmail)->first();
         
         // Generate, the password reset link. The email and token generated is embedded in the link
-        $link = config('app.url') . 'password-reset/?email=' . urlencode($user->email) . '&' . 'token=' . urlencode($tokenData->token);
-        
+        $link = config('app.client_url') . 'password-reset/?email=' . urlencode($user->email) . '&' . 'token=' . urlencode($tokenData->token);
+
         // Create Mailable Object for the Email
         $emailTemplate = (new ResetPassword($link))
             ->to($user)
